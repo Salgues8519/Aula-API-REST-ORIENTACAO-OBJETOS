@@ -45,12 +45,46 @@ export default class PostControlador {
         descricao,
         autor
        })
+       posts.push(post)
+
        return res.status(201).json(post)
     }
     editar(req:Request, res:Response){
-        
+        const { id } = req.params
+        const { titulo, descricao } =req.body
+        if (!titulo || !descricao){
+            return res.status(400).json({
+                mensagem : "Titulo ou descrição são obrigatorios"
+            }) 
+        } 
+        const postagem = posts.find((elemento)=>{
+            return elemento.id === id
+        })
+        if (!postagem){
+            return res.status(404).json({
+                mensagem: "Postagem não encontrada"
+            })
+        }
+        postagem.titulo = titulo
+        postagem.descricao = descricao
+
+        return res.status(204).json()
     }
     deletar(req:Request, res:Response){
-        
+        const {id} =req.params
+
+        const postagemIndex = posts.findIndex((elemento)=>{
+            return elemento.id === id 
+        })
+        if (postagemIndex === -1){
+            return res.status(404).json({
+                mensagem : "Postagem não encontrada"
+            })
+        }
+        posts.splice(postagemIndex, 1)
+
+        return res.status(204).json({
+            mensagem : "Postagem deletada com sucesso"
+        })
     }
 }
