@@ -4,7 +4,7 @@ import Post from "./modelos/Post";
 export const autores:Autor[]= []
 export const posts:Post[]= [
     new Post({
-        titulo: 'MeuPrimeroPost',
+        titulo: 'Meu Primero Post',
         descricao: 'Descrição do primeiro post',
         autor: new Autor({
             nome:'Rafael',

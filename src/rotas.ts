@@ -15,7 +15,7 @@ rotas.delete('/autores/:id',autorControlador.deletar)
 
 rotas.get('/postagem', postControlador.listar)
 rotas.get('/postagem/:id',postControlador.detalhar )
-
+rotas.post('/postagem', postControlador.cadastrar)
 
 // rotas.post('/autores/:id/postagem', postControlador.cadastrar)
 //tentar implementar depois desta forma acima.

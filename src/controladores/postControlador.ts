@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { autores, posts } from "../bancoDeDados";
 import Autor from "../modelos/Autor";
+import Post from "../modelos/Post";
 
 
 export default class PostControlador {
@@ -9,7 +10,7 @@ export default class PostControlador {
     }
 
     detalhar(req:Request, res:Response){
-        const {id, titulo } =req.params
+        const {id} =req.params
 
         const postID =posts.find((elemento)=>{
             return elemento.id === id
@@ -24,7 +25,27 @@ export default class PostControlador {
       
     }
     cadastrar(req:Request, res:Response){
+       const {titulo, descricao, autor_id} = req.body
        
+       if (!titulo || !descricao || !autor_id){
+        return res.status(400).json({
+            mensagem: "Todos os campos da postagem são obrigatorios. "
+        })
+       }
+       const autor = autores.find((elemento)=>{
+        return elemento.id === autor_id
+       })
+       if (!autor) {
+        return res.status(400).json({
+            mensagem: "O autor não existe"
+        })
+       }
+       const post = new Post ({
+        titulo,
+        descricao,
+        autor
+       })
+       return res.status(201).json(post)
     }
     editar(req:Request, res:Response){
         
