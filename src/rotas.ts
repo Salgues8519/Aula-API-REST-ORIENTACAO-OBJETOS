@@ -16,7 +16,7 @@ rotas.delete('/autores/:id',autorControlador.deletar)
 rotas.get('/postagem', postControlador.listar)
 rotas.get('/postagem/:id',postControlador.detalhar )
 rotas.post('/postagem', postControlador.cadastrar)
-rotas.put ('/postagem/:id', postControlador.editar)
+rotas.patch ('/postagem/:id', postControlador.editar)
 rotas.delete('/posagem/:id', postControlador.deletar)
 
 // rotas.post('/autores/:id/postagem', postControlador.cadastrar)
